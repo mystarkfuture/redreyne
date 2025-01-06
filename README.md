@@ -19,8 +19,8 @@ Working knowledge in the following topics:
 - Containers
   - https://www.youtube.com/watch?v=SnSH8Ht3MIc
   - https://www.mankier.com/5/Containerfile
-- bootc
-  - https://containers.github.io/bootc/
+- rpm-ostree
+  - https://coreos.github.io/rpm-ostree/container/
 - Fedora Silverblue (and other Fedora Atomic variants)
   - https://docs.fedoraproject.org/en-US/fedora-silverblue/
 - Github Workflows
@@ -80,39 +80,28 @@ This provides users a method of verifying the image.
 
 4. Commit the `cosign.pub` file to the root of your git repository.
 
-# Community
-
-- [**bootc discussion forums**](https://github.com/containers/bootc/discussions) - Nothing in this template is ublue specific, the upstream bootc project has a discussions forum where custom image builders can hang out and ask questions.
-- Index your image on [artifacthub.io](https://artifacthub.io), use the `artifacthub-repo.yml` file at the root to verify yourself as the publisher. 
-
-## Community Examples
-
+### Examples
 - [m2os](https://github.com/m2giles/m2os)
 - [bos](https://github.com/bsherman/bos)
 - [homer](https://github.com/bketelsen/homer/)
-
 
 ## Rebase
 
 To rebase an existing atomic Fedora installation to the latest build:
 
 - First rebase to the unsigned image, to get the proper signing keys and policies installed:
-
   ```
   rpm-ostree rebase ostree-unverified-registry:ghcr.io/mystarkfuture/redreyne:latest
   ```
 - Reboot to complete the rebase:
-
   ```
   systemctl reboot
   ```
 - Then rebase to the signed image, like so:
-
   ```
   rpm-ostree rebase ostree-image-signed:docker://ghcr.io/mystarkfuture/redreyne:latest
   ```
 - Reboot again to complete the installation
-
   ```
   systemctl reboot
   ```
